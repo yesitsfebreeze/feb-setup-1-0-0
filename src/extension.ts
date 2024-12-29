@@ -18,6 +18,4 @@ export async function activate(context: vscode.ExtensionContext) {
 	split_move(context)
 	eol(context, colors)
 	await leadermode(context)
-
-	console.log("FEB: Extension activated")
 }
