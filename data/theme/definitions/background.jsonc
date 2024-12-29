@@ -1,0 +1,18 @@
+{
+	"$schema": "vscode://schemas/color-theme",
+	"colors": {
+		"editor.background": "$background",
+		"titleBar.activeBackground": "$background",
+		"titleBar.inactiveBackground": "$background",
+		"tab.inactiveBackground": "$background",
+		"tab.activeBackground": "$background",
+		"activityBar.background": "$background",
+		"sideBar.background": "$background",
+		"sideBarSectionHeader.background": "$background",
+		"statusBar.background": "$background",
+		"statusBarItem.remoteBackground": "$background",
+		"panel.background": "$background",
+		"terminal.background": "$background",
+		"editorGroupHeader.tabsBackground": "$background",
+	}
+}

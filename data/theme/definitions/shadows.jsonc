@@ -1,0 +1,13 @@
+{
+	"$schema": "vscode://schemas/color-theme",
+	"colors": {
+		"panelStickyScroll.shadow": "#f000",
+		"editorStickyScroll.shadow": "#f000",
+		"sideBarStickyScroll.shadow": "#f000",
+		"widget.shadow": "#f000",
+		"scrollbar.shadow": "#f000",
+		"inlineChat.shadow": "#f000",
+		"listFilterWidget.shadow": "#f000",
+		"diffEditor.unchangedRegionShadow": "#f000",
+	}
+}

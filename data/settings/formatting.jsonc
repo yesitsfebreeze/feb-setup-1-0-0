@@ -1,0 +1,13 @@
+{
+	"$schema": "vscode://schemas/settings/user",
+	"files.autoSave": "onFocusChange",
+	"workbench.tree.indent": 15,
+	"editor.tabSize": 2,
+	"editor.indentSize": 2,
+	"editor.insertSpaces": false,
+	"editor.formatOnPaste": false,
+	"editor.formatOnSave": true,
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"files.eol": "\r\n"
+}

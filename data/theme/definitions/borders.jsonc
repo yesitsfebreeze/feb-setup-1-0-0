@@ -1,0 +1,18 @@
+{
+	"$schema": "vscode://schemas/color-theme",
+	"colors": {
+		"tab.border": "#0000",
+		"window.activeBorder": "#0000",
+		"activityBar.border": "#0000",
+		"sideBar.border": "#0000",
+		"statusBar.border": "#0000",
+		"statusBar.debuggingBorder": "#0000",
+		"statusBar.noFolderBorder": "#0000",
+		"panel.border": "#0000",
+		"editorWidget.border": "#0000",
+		"editor.lineHighlightBorder": "#0000",
+		"editorOverviewRuler.border": "#0000",
+		"editorGroup.border": "#0000",
+		"terminal.border": "#0000",
+	}
+}

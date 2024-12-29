@@ -1,0 +1,8 @@
+{
+	"$schema": "vscode://schemas/settings/user",
+	"zenMode.hideStatusBar": false,
+	"zenMode.showTabs": "none",
+	"zenMode.fullScreen": true,
+	"zenMode.hideLineNumbers": false,
+	"zenMode.centerLayout": false,
+}

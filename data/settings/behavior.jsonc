@@ -1,0 +1,26 @@
+{
+	"$schema": "vscode://schemas/settings/user",
+	"editor.inlayHints.enabled": "off",
+	"editor.tabCompletion": "on",
+	"explorer.confirmDelete": false,
+	"explorer.confirmDragAndDrop": false,
+	"editor.largeFileOptimizations": false,
+	"terminal.explorerKind": "external",
+	"security.workspace.trust.untrustedFiles": "open",
+	// annoying setting if set to troue
+	// cant open files in separate windows
+	"workbench.editor.revealIfOpen": false,
+	"debug.onTaskErrors": "abort",
+	"editor.inlineSuggest.enabled": true,
+	"workbench.activityBar.location": "top",
+	"workbench.layoutControl.enabled": false,
+	"cmake.showOptionsMovedNotification": false,
+	"debug.console.closeOnEnd": false,
+	"debug.allowBreakpointsEverywhere": true,
+	"extensions.ignoreRecommendations": true,
+	"editor.lineDecorationsWidth": 5,
+	"editor.showFoldingControls": "never",
+	// keeps the cursor in the middle of the screen
+	"editor.cursorSurroundingLines": 9999999,
+	"maptz.regionfolder.collapseDefaultRegionsOnOpen": false,
+}

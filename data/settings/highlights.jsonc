@@ -1,0 +1,122 @@
+{
+	"$schema": "vscode://schemas/settings/user",
+	// TODO
+	// FIXME
+	// BUG
+	// UGLY
+	// HACK
+	// IMPORTANT
+	// OPTIMIZE
+	"highlight.regexes": {
+		"(Dbg\\.)(.*)": [
+			{
+				"overviewRulerColor": "$brightred",
+				"backgroundColor": "$brightred",
+				"color": "$background",
+				"fontWeight": "bold"
+			},
+			{
+				"color": "$brightred",
+			}
+		],
+		"(#if|#else|#endif.*\\s)(.*)": [
+			{
+				"overviewRulerColor": "$brightgreen",
+				"backgroundColor": "$brightgreen",
+				"color": "$background",
+				"fontWeight": "bold"
+			},
+			{
+				"color": "$brightgreen",
+			}
+		],
+		"(#region|#endregion)(.*)": [
+			{
+				"overviewRulerColor": "$magenta",
+				"backgroundColor": "$magenta",
+				"color": "$background",
+				"fontWeight": "bold"
+			},
+			{
+				"color": "$magenta",
+			}
+		],
+		"(\/\/|#|--)( +?TODO.*)": [
+			{
+				"overviewRulerColor": "$brightcyan",
+				"backgroundColor": "$brightcyan",
+				"color": "$background",
+				"fontWeight": "bold"
+			},
+			{
+				"color": "$brightcyan"
+			}
+		],
+		"(\/\/|#|--)( +?FIXM?E?.*)": [
+			{
+				"overviewRulerColor": "$brightred",
+				"backgroundColor": "$brightred",
+				"color": "$background",
+				"fontWeight": "bold"
+			},
+			{
+				"color": "$brightred"
+			}
+		],
+		"(\/\/|#|--)( +?BUG.*)": [
+			{
+				"overviewRulerColor": "$yellow",
+				"backgroundColor": "$yellow",
+				"color": "$background",
+				"fontWeight": "bold"
+			},
+			{
+				"color": "$yellow"
+			}
+		],
+		"(\/\/|#|--)( +?UGLY.*)": [
+			{
+				"overviewRulerColor": "$brightmagenta",
+				"backgroundColor": "$brightmagenta",
+				"color": "$background",
+				"fontWeight": "bold"
+			},
+			{
+				"color": "$brightmagenta"
+			}
+		],
+		"(\/\/|#|--)( +?HACK.*)": [
+			{
+				"overviewRulerColor": "$blue",
+				"backgroundColor": "$blue",
+				"color": "$background",
+				"fontWeight": "bold"
+			},
+			{
+				"color": "$blue"
+			}
+		],
+		"(\/\/|#|--)( +?IMPORTANT.*)": [
+			{
+				"overviewRulerColor": "$brightyellow",
+				"backgroundColor": "$brightyellow",
+				"color": "$background",
+				"fontWeight": "bold"
+			},
+			{
+				"color": "$brightyellow"
+			}
+		],
+		"(\/\/|#|--)( +?OPTIMIZE.*)": [
+			{
+				"overviewRulerColor": "$brightblue",
+				"backgroundColor": "$brightblue",
+				"color": "$background",
+				"fontWeight": "bold"
+			},
+			{
+				"color": "$brightblue"
+			}
+		],
+	},
+}

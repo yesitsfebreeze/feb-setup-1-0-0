@@ -1,0 +1,159 @@
+{
+	"$schema": "vscode://schemas/settings/user",
+	"leadermode.keybindings": [
+		{
+			"keySequence": [
+				"q"
+			],
+			"label": "Quick Fix",
+			"command": "editor.action.autoFix"
+		},
+		{
+			"keySequence": [
+				"a"
+			],
+			"label": "Left",
+			"command": "feb.split_move_left",
+		},
+		{
+			"keySequence": [
+				"d"
+			],
+			"label": "Right",
+			"command": "feb.split_move_right",
+		},
+		{
+			"keySequence": [
+				"w",
+			],
+			"label": "Into",
+			"command": "editor.action.revealDefinition",
+		},
+		{
+			"keySequence": [
+				"s",
+			],
+			"label": "Back",
+			"command": "workbench.action.navigateBack",
+		},
+		{
+			"keySequence": [
+				"e",
+			],
+			"label": "Expand",
+			"command": "editor.action.smartSelect.expand"
+		},
+		{
+			"keySequence": [
+				"x"
+			],
+			"label": "Rename Symbol",
+			"command": "editor.action.rename"
+		},
+		{
+			"keySequence": [
+				"n"
+			],
+			"label": "Create file",
+			"command": "fileutils.newFileAtRoot"
+		},
+		{
+			"keySequence": [
+				"p",
+			],
+			"label": "Problem",
+			"command": "editor.action.marker.next"
+		},
+		{
+			"keySequence": [
+				"P",
+			],
+			"label": "Pascal-Case",
+			"command": "editor.action.transformToPascalcase",
+		},
+		{
+			"keySequence": [
+				"g",
+			],
+			"label": "Symbol",
+			"command": "workbench.action.gotoSymbol",
+		},
+		{
+			"keySequence": [
+				"r"
+			],
+			"label": "Run",
+			"command": "debug.relaunch"
+		},
+		{
+			"keySequence": [
+				"R"
+			],
+			"label": "Stop",
+			"command": "workbench.action.debug.stop"
+		},
+		{
+			"keySequence": [
+				"Q"
+			],
+			"label": "Run",
+			"command": "workbench.action.debug.restart"
+		},
+		{
+			"keySequence": [
+				"L",
+			],
+			"label": "Upper-Case",
+			"command": "editor.action.transformToUppercase",
+		},
+		{
+			"keySequence": [
+				"l",
+			],
+			"label": "Lower-Case",
+			"command": "editor.action.transformToLowercase",
+		},
+		{
+			"keySequence": [
+				"k",
+			],
+			"label": "Snake-case",
+			"command": "editor.action.transformToSnakecase",
+		},
+		{
+			"keySequence": [
+				"K",
+			],
+			"label": "Pascal-Case",
+			"command": "editor.action.transformToPascalcase",
+		},
+		{
+			"keySequence": [
+				"=",
+			],
+			"label": "Breakpoint",
+			"command": "editor.debug.action.toggleBreakpoint",
+		},
+		{
+			"keySequence": [
+				"h"
+			],
+			"label": "Hide panel",
+			"command": "workbench.action.closePanel"
+		},
+		{
+			"keySequence": [
+				"t"
+			],
+			"label": "Terminal",
+			"command": "terminal.focus"
+		},
+		{
+			"keySequence": [
+				"z"
+			],
+			"label": "Zen Mode",
+			"command": "workbench.action.toggleZenMode"
+		},
+	],
+}

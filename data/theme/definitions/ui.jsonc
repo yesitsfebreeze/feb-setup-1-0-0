@@ -1,0 +1,19 @@
+{
+	"$schema": "vscode://schemas/color-theme",
+	"colors": {
+		"input.background": "$muted",
+		"input.border": "$muted",
+		"input.foreground": "$foreground",
+		"keybindingLabel.background": "#0000",
+		"keybindingLabel.foreground": "$primary",
+		"keybindingLabel.border": "$primary",
+		"keybindingLabel.bottomBorder": "$primary",
+		"quickInput.background": "$subtle",
+		"focusBorder": "$primary",
+		"list.focusBackground": "$subtle",
+		"list.focusForeground": "$primary",
+		"list.activeSelectionBackground": "$subtle",
+		"list.activeSelectionForeground": "$primary",
+		"sideBarActivityBarTop.border": "#0000",
+	}
+}

@@ -1,0 +1,55 @@
+// some inspiration here
+// http =//gogh-co.github.io/gogh/
+
+primary = #91c8ef
+background = #282828
+foreground = #EBDBB2
+cursor = #91c8ef
+
+black = #282828
+red = #CC241D
+green = #98971A
+yellow = #D79921
+blue = #458588
+magenta = #B16286
+cyan = #689D6A
+white = #A89984
+brightblack = #928374
+brightred = #FB4934
+brightgreen = #B8BB26
+brightyellow = #FABD2F
+brightblue = #83A598
+brightmagenta = #D3869B
+brightcyan = #8EC07C
+brightwhite = #EBDBB2
+
+syntax_bracket1 = #8a836e
+syntax_bracket2 = #8a836e
+syntax_bracket3 = #8a836e
+syntax_bracket4 = #8a836e
+syntax_bracket5 = #8a836e
+syntax_bracket6 = #8a836e
+syntax_text = $white
+syntax_highlight = $brightblue
+syntax_keywords = $brightred
+syntax_functions = $brightred
+syntax_language_constants = $brightred
+syntax_classes = $yellow
+syntax_function_calls = $brightgreen
+syntax_method_calls = $syntax_function_calls
+syntax_entities = $brightgreen
+syntax_storage = $brightred
+syntax_variables = $white
+syntax_special_variables = $brightcyan
+syntax_locals = $brightblack
+syntax_imports = $brightblue
+syntax_numbers = $brightmagenta
+syntax_strings = $brightblue
+syntax_regex = $brightcyan
+syntax_links = $brightblue
+syntax_comments = $comments 
+syntax_operators = $cyan
+syntax_punctuation = $white
+syntax_properties = $red
+syntax_parameters = $brightblue
+syntax_error = $brightred

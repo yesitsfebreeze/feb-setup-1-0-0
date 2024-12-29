@@ -1,0 +1,19 @@
+{
+	"$schema": "vscode://schemas/settings/user",
+	"multiCommand.commands": [
+		{
+			"command": "debug.relaunch",
+			"sequence": [
+				"workbench.action.debug.stop",
+				"workbench.action.debug.start"
+			]
+		},
+		{
+			"command": "group.close",
+			"sequence": [
+				"workbench.action.closeActiveEditor",
+				"workbench.action.closeEditorsInGroup"
+			]
+		},
+	],
+}

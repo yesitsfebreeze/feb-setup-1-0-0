@@ -1,0 +1,16 @@
+{
+	"$schema": "vscode://schemas/color-theme",
+	"colors": {
+		"statusBar.background": "$background",
+		"statusBar.foreground": "$foreground",
+		"statusBar.debuggingBackground": "$background",
+		"statusBar.debuggingForeground": "$brightred",
+		"statusBar.noFolderBackground": "$background",
+		"statusBar.noFolderForeground": "$muted",
+		"statusBarItem.prominentBackground": "$primary",
+		"statusBarItem.prominentForeground": "$onprimary",
+		"statusBarItem.prominentHoverBackground": "$primary",
+		"statusBarItem.remoteBackground": "#0000",
+		"statusBarItem.remoteForeground": "$primary",
+	}
+}

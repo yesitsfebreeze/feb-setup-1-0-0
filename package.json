@@ -1,0 +1,137 @@
+{
+	"name": "feb-setup-1-0-0",
+	"displayName": "feb.setup-1.0.0",
+	"description": "",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.96.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"themes": [
+			{
+				"label": ".Ansi",
+				"uiTheme": "vs-dark",
+				"path": "./theme.json"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "feb.controlPressed",
+				"key": "ctrl",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "feb.controlReleased",
+				"key": "-ctrl",
+				"when": "editorTextFocus"
+			}
+		],
+		"commands": [
+			{
+				"command": "feb.controlPressed",
+				"title": "Control Key Pressed"
+			},
+			{
+				"command": "feb.controlReleased",
+				"title": "Control Key Released"
+			},
+			{
+				"command": "feb.escape",
+				"title": "Feb: Stop at last active multi edit. (remap to escape key)"
+			},
+			{
+				"command": "feb.split_move_left",
+				"title": "Moves to left editor group or creates a new one"
+			},
+			{
+				"command": "feb.split_move_right",
+				"title": "Moves to right editor group or creates a new one"
+			},
+			{
+				"command": "feb.pick_theme",
+				"title": "Feb: Pick an ansi theme file"
+			},
+			{
+				"command": "feb.build_theme",
+				"title": "Feb: Build ANSI theme"
+			},
+			{
+				"command": "leadermode.enter",
+				"title": "Enter Leader Mode"
+			},
+			{
+				"command": "leadermode.exit",
+				"title": "Exit Leader Mode"
+			}
+		],
+		"configuration": {
+			"properties": {
+				"feb.theme_file": {
+					"type": "string",
+					"default": "",
+					"description": "AnsiThemeFile"
+				},
+				"leadermode.showKeyGuide": {
+					"type": "string",
+					"enum": [
+						"always",
+						"never"
+					],
+					"default": "always"
+				},
+				"leadermode.keybindings": {
+					"default": []
+				}
+			}
+		}
+	},
+	"extensionPack": [
+		"sleistner.vscode-fileutils",
+		"GitHub.copilot",
+		"GitHub.copilot-chat",
+		"be5invis.vscode-custom-css",
+		"maptz.regionfolder",
+		"angelo-breuer.clock",
+		"EditorConfig.EditorConfig",
+		"fabiospampinato.vscode-highlight",
+		"gera2ld.markmap-vscode",
+		"ryuta46.multi-command",
+		"ms-vscode.makefile-tools",
+		"PKief.material-icon-theme",
+		"slevesque.shader",
+		"PolyMeilex.wgsl"
+	],
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src",
+		"test": "vscode-test"
+	},
+	"devDependencies": {
+		"@types/mocha": "^10.0.10",
+		"@types/node": "20.x",
+		"@types/vscode": "^1.96.0",
+		"@typescript-eslint/eslint-plugin": "^8.17.0",
+		"@typescript-eslint/parser": "^8.17.0",
+		"@vscode/test-cli": "^0.0.10",
+		"@vscode/test-electron": "^2.4.1",
+		"eslint": "^9.16.0",
+		"typescript": "^5.7.2"
+	},
+	"dependencies": {
+		"colord": "^2.9.3",
+		"json5": "^2.2.3"
+	},
+	"__metadata": {
+		"size": 55910458
+	}
+}

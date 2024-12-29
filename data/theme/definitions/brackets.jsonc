@@ -1,0 +1,12 @@
+{
+	"$schema": "vscode://schemas/color-theme",
+	"colors": {
+		"editorBracketHighlight.foreground1": "$syntax_bracket1",
+		"editorBracketHighlight.foreground2": "$syntax_bracket2",
+		"editorBracketHighlight.foreground3": "$syntax_bracket3",
+		"editorBracketHighlight.foreground4": "$syntax_bracket4",
+		"editorBracketHighlight.foreground5": "$syntax_bracket5",
+		"editorBracketHighlight.foreground6": "$syntax_bracket6",
+		"editorBracketHighlight.unexpectedBracket.foreground": "$brightred"
+	}
+}

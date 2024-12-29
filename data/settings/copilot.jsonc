@@ -1,0 +1,10 @@
+{
+	"$schema": "vscode://schemas/settings/user",
+	"github.copilot.enable": {
+		"*": true,
+		"plaintext": false,
+		"markdown": false,
+		"scminput": false,
+		"csharp": true
+	},
+}
