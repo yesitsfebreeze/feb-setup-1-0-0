@@ -4,18 +4,18 @@ import keybinds from './keybinds_loader';
 import escape from './escape';
 import theme from './theme';
 import eol from './eol';
-import split_move from './split_move';
 import { get_colors } from './theme_builder';
-import leadermode from './leader_mode/extension';
+import background from './background';
+import split from './split';
 
-export async function activate(context: vscode.ExtensionContext) {
+export function activate(context: vscode.ExtensionContext) {
 	const colors = get_colors(context)
-
+	background(context)
 	escape(context)
-	theme(context, colors)
+	theme(context, colors, background)
 	settings(context, colors)
 	keybinds(context)
-	split_move(context)
+	split(context)
+
 	eol(context, colors)
-	await leadermode(context)
 }

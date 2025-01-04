@@ -4,7 +4,7 @@
 	"workbench.colorTheme": ".Ansi",
 	"workbench.preferredDarkColorTheme": ".Ansi",
 	"editor.fontSize": 14,
-	"editor.lineHeight": 18,
+	"editor.lineHeight": 14,
 	"terminal.integrated.fontFamily": "DepartureMono Nerd Font, consolas, monospace",
 	"editor.fontFamily": "DepartureMono Nerd Font, consolas, monospace",
 	"editor.fontLigatures": false,

@@ -3,41 +3,6 @@
 	"leadermode.keybindings": [
 		{
 			"keySequence": [
-				"q"
-			],
-			"label": "Quick Fix",
-			"command": "editor.action.autoFix"
-		},
-		{
-			"keySequence": [
-				"a"
-			],
-			"label": "Left",
-			"command": "feb.split_move_left",
-		},
-		{
-			"keySequence": [
-				"d"
-			],
-			"label": "Right",
-			"command": "feb.split_move_right",
-		},
-		{
-			"keySequence": [
-				"w",
-			],
-			"label": "Into",
-			"command": "editor.action.revealDefinition",
-		},
-		{
-			"keySequence": [
-				"s",
-			],
-			"label": "Back",
-			"command": "workbench.action.navigateBack",
-		},
-		{
-			"keySequence": [
 				"e",
 			],
 			"label": "Expand",
@@ -52,108 +17,258 @@
 		},
 		{
 			"keySequence": [
-				"n"
+				"s",
 			],
-			"label": "Create file",
+			"label": "Split",
+			"command": "feb.split"
+		},
+		// #region file
+		{
+			"keySequence": [
+				"f",
+			],
+			"label": "File",
+		},
+		{
+			"keySequence": [
+				"f",
+				"f",
+			],
+			"label": "New",
+			"command": "fileutils.newFile"
+		},
+		{
+			"keySequence": [
+				"f",
+				"F",
+			],
+			"label": "New@Root",
 			"command": "fileutils.newFileAtRoot"
 		},
 		{
 			"keySequence": [
-				"p",
+				"f",
+				"d",
 			],
-			"label": "Problem",
-			"command": "editor.action.marker.next"
+			"label": "Delete",
+			"command": "fileutils.removeFile"
 		},
 		{
 			"keySequence": [
-				"P",
+				"f",
+				"r",
 			],
-			"label": "Pascal-Case",
-			"command": "editor.action.transformToPascalcase",
+			"label": "Rename",
+			"command": "fileutils.moveFile"
+		},
+		// #endregion file
+		// #region navigate
+		{
+			"keySequence": [
+				"d",
+			],
+			"label": "Navigate",
 		},
 		{
 			"keySequence": [
-				"g",
+				"d",
+				"d",
+			],
+			"label": "Definition",
+			"command": "editor.action.revealDefinition",
+		},
+		{
+			"keySequence": [
+				"d",
+				"q",
+			],
+			"label": "Back",
+			"command": "workbench.action.navigateBack",
+		},
+		{
+			"keySequence": [
+				"d",
+				"e",
+			],
+			"label": "Forward",
+			"command": "workbench.action.navigateForward",
+		},
+		{
+			"keySequence": [
+				"d",
+				"s",
 			],
 			"label": "Symbol",
 			"command": "workbench.action.gotoSymbol",
 		},
 		{
 			"keySequence": [
-				"r"
+				"d",
+				"a",
+			],
+			"label": "Bracket",
+			"command": "editor.action.jumpToBracket",
+		},
+		{
+			"keySequence": [
+				"d",
+				"w",
+			],
+			"label": "Implementation",
+			"command": "editor.action.goToImplementation",
+		},
+		{
+			"keySequence": [
+				"d",
+				"z"
+			],
+			"label": "Terminal",
+			"command": "terminal.focus"
+		},
+		// #endregion navigate
+		// #region actions
+		{
+			"keySequence": [
+				"q",
+			],
+			"label": "Actions",
+		},
+		{
+			"keySequence": [
+				"q",
+				"q",
+			],
+			"label": "QuickFix",
+			"command": "editor.action.autoFix"
+		},
+		{
+			"keySequence": [
+				"q",
+				"w",
+			],
+			"label": "Next Problem",
+			"command": "editor.action.marker.next"
+		},
+		// #endregion actions
+		// #region debug
+		{
+			"keySequence": [
+				"g",
+			],
+			"label": "Debug",
+		},
+		{
+			"keySequence": [
+				"g",
+				"g"
 			],
 			"label": "Run",
 			"command": "debug.relaunch"
 		},
 		{
 			"keySequence": [
-				"R"
-			],
-			"label": "Stop",
-			"command": "workbench.action.debug.stop"
-		},
-		{
-			"keySequence": [
-				"Q"
-			],
-			"label": "Run",
-			"command": "workbench.action.debug.restart"
-		},
-		{
-			"keySequence": [
-				"L",
-			],
-			"label": "Upper-Case",
-			"command": "editor.action.transformToUppercase",
-		},
-		{
-			"keySequence": [
-				"l",
-			],
-			"label": "Lower-Case",
-			"command": "editor.action.transformToLowercase",
-		},
-		{
-			"keySequence": [
-				"k",
-			],
-			"label": "Snake-case",
-			"command": "editor.action.transformToSnakecase",
-		},
-		{
-			"keySequence": [
-				"K",
-			],
-			"label": "Pascal-Case",
-			"command": "editor.action.transformToPascalcase",
-		},
-		{
-			"keySequence": [
-				"=",
+				"g",
+				"a"
 			],
 			"label": "Breakpoint",
 			"command": "editor.debug.action.toggleBreakpoint",
 		},
 		{
 			"keySequence": [
-				"h"
+				"g",
+				"s"
 			],
-			"label": "Hide panel",
-			"command": "workbench.action.closePanel"
+			"label": "Stop",
+			"command": "workbench.action.debug.stop"
 		},
 		{
 			"keySequence": [
-				"t"
+				"g",
+				"r"
 			],
-			"label": "Terminal",
-			"command": "terminal.focus"
+			"label": "Restart",
+			"command": "workbench.action.debug.restart"
+		},
+		// #endregion debug
+		// #region casing
+		{
+			"keySequence": [
+				"c",
+			],
+			"label": "Casing",
 		},
 		{
 			"keySequence": [
+				"c",
+				"c",
+			],
+			"label": "Lowercase",
+			"command": "editor.action.transformToLowercase",
+		},
+		{
+			"keySequence": [
+				"c",
+				"C",
+			],
+			"label": "Uppercase",
+			"command": "editor.action.transformToUppercase",
+		},
+		{
+			"keySequence": [
+				"c",
+				"s",
+			],
+			"label": "Snake-case",
+			"command": "editor.action.transformToSnakecase",
+		},
+		{
+			"keySequence": [
+				"c",
+				"p",
+			],
+			"label": "Pascal-Case",
+			"command": "editor.action.transformToPascalcase",
+		},
+		{
+			"keySequence": [
+				"c",
+				"k",
+			],
+			"label": "Kebab-Case",
+			"command": "editor.action.transformToKebabcase",
+		},
+		{
+			"keySequence": [
+				"c",
+				"t",
+			],
+			"label": "Title-Case",
+			"command": "editor.action.transformToTitlecase",
+		},
+		// #endregion casing
+		// #region zen
+		{
+			"keySequence": [
+				"z"
+			],
+			"label": "Zen",
+		},
+		{
+			"keySequence": [
+				"z",
 				"z"
 			],
 			"label": "Zen Mode",
 			"command": "workbench.action.toggleZenMode"
 		},
+		{
+			"keySequence": [
+				"z",
+				"q"
+			],
+			"label": "Hide panels",
+			"command": "feb.hide_all"
+		},
+		// #endregion zen
 	],
 }

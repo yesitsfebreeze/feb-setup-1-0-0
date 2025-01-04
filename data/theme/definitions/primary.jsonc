@@ -16,7 +16,7 @@
 		"badge.foreground": "$onprimary",
 		"editorGroup.dropBackground": "$primary15",
 		"settings.modifiedItemIndicator": "$primary",
-		"debugIcon.breakpointForeground": "$primary",
+		"debugIcon.breakpointForeground": "$syntax_breakpoint",
 		"icon.foreground": "$primary",
 		"progressBar.background": "$primary",
 		"panelTitle.activeBorder": "$primary",

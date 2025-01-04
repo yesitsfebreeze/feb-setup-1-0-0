@@ -47,12 +47,8 @@
 				"title": "Feb: Stop at last active multi edit. (remap to escape key)"
 			},
 			{
-				"command": "feb.split_move_left",
-				"title": "Moves to left editor group or creates a new one"
-			},
-			{
-				"command": "feb.split_move_right",
-				"title": "Moves to right editor group or creates a new one"
+				"command": "feb.split",
+				"title": "Moves to editor group or creates a new one"
 			},
 			{
 				"command": "feb.pick_theme",
@@ -60,15 +56,11 @@
 			},
 			{
 				"command": "feb.build_theme",
-				"title": "Feb: Build ANSI theme"
+				"title": "Feb: Build Theme"
 			},
 			{
-				"command": "leadermode.enter",
-				"title": "Enter Leader Mode"
-			},
-			{
-				"command": "leadermode.exit",
-				"title": "Exit Leader Mode"
+				"command": "feb.update_background",
+				"title": "Feb: Update Background"
 			}
 		],
 		"configuration": {
@@ -76,24 +68,34 @@
 				"feb.theme_file": {
 					"type": "string",
 					"default": "",
-					"description": "AnsiThemeFile"
+					"description": "Ansi Theme File"
 				},
-				"leadermode.showKeyGuide": {
+				"feb.bg_image": {
 					"type": "string",
-					"enum": [
-						"always",
-						"never"
-					],
-					"default": "always"
+					"default": "",
+					"description": "Background Image Path"
 				},
-				"leadermode.keybindings": {
-					"default": []
+				"feb.bg_opacity": {
+					"type": "number",
+					"default": "1",
+					"description": "Background Image Opacity"
+				},
+				"feb.bg_blur": {
+					"type": "number",
+					"default": "1",
+					"description": "Background Image Blur"
+				},
+				"feb.bg_brightness": {
+					"type": "number",
+					"default": "1",
+					"description": "Background Image Brightness"
 				}
 			}
 		}
 	},
 	"extensionPack": [
 		"sleistner.vscode-fileutils",
+		"michaelgriscom.leadermode",
 		"GitHub.copilot",
 		"GitHub.copilot-chat",
 		"be5invis.vscode-custom-css",
@@ -106,7 +108,8 @@
 		"ms-vscode.makefile-tools",
 		"PKief.material-icon-theme",
 		"slevesque.shader",
-		"PolyMeilex.wgsl"
+		"PolyMeilex.wgsl",
+		"tshino.kb-macro"
 	],
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

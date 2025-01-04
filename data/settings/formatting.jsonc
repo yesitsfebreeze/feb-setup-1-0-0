@@ -9,5 +9,8 @@
 	"editor.formatOnSave": true,
 	"javascript.updateImportsOnFileMove.enabled": "always",
 	"typescript.updateImportsOnFileMove.enabled": "always",
-	"files.eol": "\r\n"
+	"files.eol": "\r\n",
+	"maptz.regionfolder": {
+		"collapseDefaultRegionsOnOpen": false,
+	},
 }

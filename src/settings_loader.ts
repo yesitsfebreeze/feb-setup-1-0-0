@@ -7,7 +7,8 @@ import { Colors, replace_colors } from './theme_builder';
 export default function (context: vscode.ExtensionContext, colors: Colors) {
 	let settings: { [key: string]: any } = {}
 
-	let css = path.join(context.extensionPath, "data", "theme", "custom.css")
+	let css = path.join(context.extensionPath, "cache", "custom.css")
+	let cursor_js = path.join(context.extensionPath, "data", "theme", "cursor.js")
 
 	const settings_path = path.join(context.extensionPath, "data", "settings")
 	fs.readdirSync(settings_path).forEach(file => {
@@ -29,7 +30,11 @@ export default function (context: vscode.ExtensionContext, colors: Colors) {
 
 	vscode.workspace.getConfiguration().update(
 		"vscode_custom_css.imports",
-		[`file://${css}`,],
+		[
+			`file://${css}`,
+			`file://${cursor_js}`,
+
+		],
 		vscode.ConfigurationTarget.Global
 	);
 

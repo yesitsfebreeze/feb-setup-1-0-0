@@ -22,19 +22,127 @@
 }
 
 .debug-toolbar {
-	--y-position: -2px !important;
+	--y-position: 0 !important;
+	--x-position: 1 !important;
 	z-index: 9999999999999 !important;
 	position: fixed !important;
-	background-color: transparent !important;
-	left: 50% !important;
-	transform: translateX(-50%) !important;
-	top: -2px !important;
+	top: 0px !important;
 }
 
 .debug-toolbar .drag-area {
 	display: none !important;
 }
 
-/* * { */
-/* border-radius: 0px !important; */
-/* } */
+:root {
+	--base-background: transparent !important;
+	--editor-background: transparent !important;
+}
+
+.scroll-decoration {
+	box-shadow: none !important;
+}
+
+.minimap,
+.editor-scrollable>.decorationsOverviewRuler {
+	opacity: 0.6;
+}
+
+.editor-container {
+	background-color: var(--base-background) !important;
+}
+
+.search-view .search-widget .input-box,
+.search-view .search-widget .input-box .monaco-inputbox,
+.monaco-workbench .part.editor>.content>.one-editor-silo>.container>.title .tabs-container>.tab,
+.monaco-editor-background,
+.monaco-editor .margin,
+.monaco-workbench .part>.content,
+.monaco-workbench .editor>.content>.one-editor-silo.editor-one,
+.monaco-workbench .part.editor>.content>.one-editor-silo>.container>.title,
+.monaco-workbench .part>.title,
+.monaco-workbench,
+.monaco-workbench .part,
+body {
+	background: var(--editor-background) !important;
+}
+
+.editor-group-container>.tabs {
+	background-color: var(--base-background) !important;
+}
+
+.editor-group-container>.tabs .tab {
+	background-color: var(--base-background) !important;
+}
+
+.extension-editor,
+.monaco-workbench .part.editor>.content>.one-editor-silo>.container>.title .tabs-container>.tab.active,
+.preferences-editor>.preferences-header,
+.preferences-editor>.preferences-editors-container.side-by-side-preferences-editor .preferences-header-container,
+.monaco-editor,
+.monaco-editor .inputarea.ime-input,
+.monaco-list .monaco-list-rows {
+	background: var(--base-background) !important;
+}
+
+.monaco-workbench .part.sidebar {
+	background-color: var(--base-background) !important;
+}
+
+.editor-group-container>.tabs .tab {
+	border: none !important;
+}
+
+.terminal-outer-container,
+.xterm-viewport,
+.xterm-rows {
+	background-color: var(--base-background) !important;
+}
+
+html {
+	background-color: #000 !important;
+}
+
+body::before {
+	content: "" !important;
+	top: 0 !important;
+	left: 0 !important;
+	width: 100% !important;
+	height: 100% !important;
+	position: fixed !important;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	opacity: ___BACKGROUND_BRIGHTNESS___;
+	filter: blur(___BACKGROUND_BLUR___px);
+	-webkit-filter: blur(___BACKGROUND_BLUR___px);
+}
+
+.monaco-workbench::before {
+	content: "" !important;
+	top: 0 !important;
+	left: 0 !important;
+	width: 100% !important;
+	height: 100% !important;
+	position: fixed !important;
+	background-color: var(--vscode-editor-background) !important;
+	opacity: ___BACKGROUND_OPACITY___;
+}
+
+.notebookOverlay.notebook-editor,
+.cell-statusbar-container,
+.margin-view-overlays,
+.monaco-list-row:hover:not(.selected):not(.focused) {
+	background-color: var(--base-background) !important;
+}
+
+.pane-header {
+	background-color: var(--base-background) !important;
+}
+
+#workbench\.parts\.editor>div.content.empty>div>div>div>div>div.monaco-scrollable-element.mac>div.split-view-container>div>div {
+	background-color: var(--base-background) !important;
+}
+
+body::before {
+	background-image: url(data:image/jpeg;base64,___BACKGROUND___) !important;
+}
