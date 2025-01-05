@@ -1,8 +1,0 @@
-{
-	"colors": {
-		"editorError.foreground": "#c71726",
-		"editorWarning.foreground": "#e98842",
-		"editorInfo.foreground": "#73b4ac",
-		"editorHint.foreground": "#80bb2e",
-	}
-}

@@ -2,9 +2,8 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import JSON5 from 'json5'
-import { Colors, replace_colors } from './theme_builder';
 
-export default function (context: vscode.ExtensionContext, colors: Colors) {
+export default function (context: vscode.ExtensionContext) {
 	let settings: { [key: string]: any } = {}
 
 	let css = path.join(context.extensionPath, "cache", "custom.css")
@@ -15,7 +14,6 @@ export default function (context: vscode.ExtensionContext, colors: Colors) {
 		file = path.join(settings_path, file)
 
 		let content = fs.readFileSync(file, 'utf-8')
-		content = replace_colors(content, colors)
 		let data = JSON5.parse(content)
 		Object.entries(data).forEach(([key, value]) => {
 			if (key == "$schema") return;
@@ -37,5 +35,6 @@ export default function (context: vscode.ExtensionContext, colors: Colors) {
 		],
 		vscode.ConfigurationTarget.Global
 	);
+
 
 }

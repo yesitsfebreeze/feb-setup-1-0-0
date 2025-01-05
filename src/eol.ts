@@ -1,7 +1,6 @@
 import * as vscode from 'vscode'
-import { Colors } from "./theme_builder"
 
-export default function (context: vscode.ExtensionContext, colors: Colors) {
+export default function (context: vscode.ExtensionContext) {
 	const nullDecoration = vscode.window.createTextEditorDecorationType({})
 
 	let activeEditor = vscode.window.activeTextEditor
@@ -40,7 +39,7 @@ export default function (context: vscode.ExtensionContext, colors: Colors) {
 				renderOptions: {
 					after: {
 						contentText: '¬',
-						color: colors["muted"] as string
+						color: new vscode.ThemeColor('editorWhitespace.foreground')
 					}
 				}
 			}

@@ -14,34 +14,7 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"themes": [
-			{
-				"label": ".Ansi",
-				"uiTheme": "vs-dark",
-				"path": "./theme.json"
-			}
-		],
-		"keybindings": [
-			{
-				"command": "feb.controlPressed",
-				"key": "ctrl",
-				"when": "editorTextFocus"
-			},
-			{
-				"command": "feb.controlReleased",
-				"key": "-ctrl",
-				"when": "editorTextFocus"
-			}
-		],
 		"commands": [
-			{
-				"command": "feb.controlPressed",
-				"title": "Control Key Pressed"
-			},
-			{
-				"command": "feb.controlReleased",
-				"title": "Control Key Released"
-			},
 			{
 				"command": "feb.escape",
 				"title": "Feb: Stop at last active multi edit. (remap to escape key)"
@@ -51,25 +24,12 @@
 				"title": "Moves to editor group or creates a new one"
 			},
 			{
-				"command": "feb.pick_theme",
-				"title": "Feb: Pick an ansi theme file"
-			},
-			{
-				"command": "feb.build_theme",
-				"title": "Feb: Build Theme"
-			},
-			{
-				"command": "feb.update_background",
-				"title": "Feb: Update Background"
+				"command": "feb.reload",
+				"title": "Feb: Reload"
 			}
 		],
 		"configuration": {
 			"properties": {
-				"feb.theme_file": {
-					"type": "string",
-					"default": "",
-					"description": "Ansi Theme File"
-				},
 				"feb.bg_image": {
 					"type": "string",
 					"default": "",
@@ -109,7 +69,8 @@
 		"PKief.material-icon-theme",
 		"slevesque.shader",
 		"PolyMeilex.wgsl",
-		"tshino.kb-macro"
+		"tshino.kb-macro",
+		"daylerees.rainglow"
 	],
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
