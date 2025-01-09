@@ -6,7 +6,8 @@
 			"sequence": [
 				"leadermode.exit",
 				"workbench.action.debug.stop",
-				"workbench.action.debug.start"
+				"workbench.action.debug.start",
+				"feb.hide_all"
 			]
 		},
 		{

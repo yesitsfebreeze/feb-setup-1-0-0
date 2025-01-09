@@ -7,10 +7,10 @@ export default function (context: vscode.ExtensionContext) {
 
 	const cache_file = path.join(context.extensionPath, "cache", "custom.css");
 
-	let data = ""
-	let opacity = config.bg_opacity
-	let blur = config.bg_blur
-	let brightness = config.bg_brightness
+	let data = "";
+	let opacity = config.bg_opacity;
+	let blur = config.bg_blur;
+	let brightness = config.bg_brightness;
 
 	if (opacity < 0 || opacity > 1 || isNaN(opacity)) {
 		vscode.workspace.getConfiguration().update(
@@ -18,7 +18,7 @@ export default function (context: vscode.ExtensionContext) {
 			1,
 			vscode.ConfigurationTarget.Global
 		);
-		opacity = 1
+		opacity = 1;
 	}
 
 	if (isNaN(blur)) {
@@ -27,7 +27,7 @@ export default function (context: vscode.ExtensionContext) {
 			0,
 			vscode.ConfigurationTarget.Global
 		);
-		blur = 0
+		blur = 0;
 	}
 
 	if (brightness < 0 || brightness > 1 || isNaN(brightness)) {
@@ -36,7 +36,7 @@ export default function (context: vscode.ExtensionContext) {
 			1,
 			vscode.ConfigurationTarget.Global
 		);
-		brightness = 1
+		brightness = 1;
 	}
 
 	if (config.bg_image !== '') {
@@ -56,11 +56,11 @@ export default function (context: vscode.ExtensionContext) {
 		}
 	}
 
-	let css = path.join(context.extensionPath, "data", "theme", "custom.css")
-	let content = fs.readFileSync(css, 'utf-8')
-	content = content.replaceAll("___BACKGROUND___", data)
-	content = content.replaceAll("___BACKGROUND_OPACITY___", opacity)
-	content = content.replaceAll("___BACKGROUND_BLUR___", blur)
-	content = content.replaceAll("___BACKGROUND_BRIGHTNESS___", brightness)
-	fs.writeFileSync(cache_file, content)
+	let css = path.join(context.extensionPath, "data", "theme", "custom.css");
+	let content = fs.readFileSync(css, 'utf-8');
+	content = content.replaceAll("___BACKGROUND___", data);
+	content = content.replaceAll("___BACKGROUND_OPACITY___", opacity);
+	content = content.replaceAll("___BACKGROUND_BLUR___", blur);
+	content = content.replaceAll("___BACKGROUND_BRIGHTNESS___", brightness);
+	fs.writeFileSync(cache_file, content);
 }

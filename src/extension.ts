@@ -7,18 +7,18 @@ import background from './background';
 import split from './split';
 
 export function activate(context: vscode.ExtensionContext) {
-	background(context)
-	escape(context)
-	settings(context)
-	keybinds(context)
-	split(context)
-	eol(context)
+	background(context);
+	escape(context);
+	settings(context);
+	keybinds(context);
+	split(context);
+	eol(context);
 
 	let disp = vscode.commands.registerCommand('feb.reload', async () => {
-		background(context)
-		settings(context)
-		keybinds(context)
-		vscode.commands.executeCommand("extension.updateCustomCSS")
+		background(context);
+		settings(context);
+		keybinds(context);
+		vscode.commands.executeCommand("extension.updateCustomCSS");
 		setTimeout(function () {
 			vscode.commands.executeCommand('workbench.action.reloadWindow');
 		}, 2000);

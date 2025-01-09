@@ -1,311 +1,292 @@
+{
+	const ANIMATION_TIME = 382 // ms
+	const SHRINK = 0.6
+	const MAX_LENGTH = 100
 
-const CursorStyle = "block" // Options are 'line' or 'block'
-const TrailLength = 5 // Recommended value is around 8
-const CursorUpdatePollingRate = 500 // Recommended value is around 500
+	const cursor_list = []
 
-function createTrail(options) {
-	const totalParticles = options?.length || 20
-	let particlesColor = options?.color || "#A052FF"
-	const style = options?.style || "block"
-	const canvas = options?.canvas
-	const context = canvas.getContext("2d")
-	let cursor = { x: 0, y: 0 }
-	let particles = []
-	let width, height
-	let sizeX = options?.size || 3
-	let sizeY = options?.sizeY || sizeX * 2.2
-	let cursorsInitted = false
-
-	// update canvas size
-	function updateSize(x, y) {
-		width = x
-		height = y
-		canvas.width = x
-		canvas.height = y
+	const ANIMATION_EASING = function (x) {
+		return -(Math.cos(Math.PI * x) - 1) / 2
 	}
 
-	// update cursor position
-	function move(x, y) {
-		x = x + sizeX / 2
-		cursor.x = x
-		cursor.y = y
-		if (cursorsInitted === false) {
-			cursorsInitted = true
-			for (let i = 0; i < totalParticles; i++) {
-				addParticle(x, y)
+	function overlaps(a, b) {
+		return a.left < b.right
+			&& a.right > b.left
+			&& a.top < b.bottom
+			&& a.bottom > b.top
+	}
+
+	function validate(cursor) {
+		const visible = cursor.checkVisibility({
+			visibilityProperty: true,
+			contentVisibilityAuto: true,
+		})
+		if (!visible) return false
+		const bbox = cursor.getBoundingClientRect()
+		let view = cursor.closest(".monaco-editor")
+		let view_bbox = view.getBoundingClientRect()
+		if (!view) return false
+		if (!overlaps(bbox, view_bbox)) return false
+
+		let minimap = view.querySelector(".minimap")
+		if (minimap) {
+			let minimap_bbox = minimap.getBoundingClientRect()
+			if (overlaps(bbox, minimap_bbox)) return false
+		}
+
+		return true
+	}
+
+	function create_canvas(container, cls) {
+		let canvas = container.querySelector(`.${cls}`)
+		if (!canvas) {
+			const c = document.createElement('canvas')
+			c.className = cls
+			c.style.position = "fixed"
+			c.style.pointerEvents = "none"
+			c.style.top = 0
+			c.style.left = 0
+			c.style.zIndex = 1
+			container.insertBefore(c, container.firstChild)
+			canvas = c
+		}
+
+		return canvas
+	}
+
+	function order_points(points) {
+		const centroid = points.reduce(
+			(acc, point) => ({
+				x: acc.x + point.x / points.length,
+				y: acc.y + point.y / points.length,
+			}),
+			{ x: 0, y: 0 }
+		)
+
+		return points.sort((a, b) => {
+			const angleA = Math.atan2(a.y - centroid.y, a.x - centroid.x)
+			const angleB = Math.atan2(b.y - centroid.y, b.x - centroid.x)
+			return angleA - angleB
+		})
+	}
+
+	function farthest_points(center, points) {
+		const distances = points.map(point => ({
+			point,
+			distance: Math.sqrt(Math.pow(point.x - center.x, 2) + Math.pow(point.y - center.y, 2))
+		}))
+
+		distances.sort((a, b) => b.distance - a.distance)
+		return [distances[0].point, distances[1].point]
+	}
+
+	function get_points(a, b) {
+		const centerA = { x: (a.tl.x + a.br.x) / 2, y: (a.tl.y + a.br.y) / 2 }
+		const centerB = { x: (b.tl.x + b.br.x) / 2, y: (b.tl.y + b.br.y) / 2 }
+
+		const pointsA = [a.tl, a.tr, a.br, a.bl]
+		const pointsB = [b.tl, b.tr, b.br, b.bl]
+
+		const _a = farthest_points(centerA, pointsB)
+		const _b = farthest_points(centerB, pointsA)
+
+		return order_points([..._a, ..._b])
+	}
+
+
+	function lerp(a, b, t) {
+		return a + (b - a) * t
+	}
+
+	function draw(c, ctnr, ctx, delta) {
+		let opacity = 1
+		c.els.forEach(el => {
+			if (el.parentNode) {
+				opacity = Math.min(opacity, get_float_value(el.parentNode, "opacity"))
 			}
-		}
-	}
+		})
+		c.time -= delta
+		c.time = Math.max(c.time, 0)
+		const percent = c.time / ANIMATION_TIME
 
-	// particle class
-	class Particle {
-		constructor(x, y) {
-			this.position = { x: x, y: y }
-		}
-	}
+		const w = c.size.x
+		const h = c.size.y
+		const dx = c.smear.x - c.pos.x
+		const dy = c.smear.y - c.pos.y
+		const distance = Math.sqrt(dx * dx + dy * dy) || 1
 
-	function addParticle(x, y, image) {
-		particles.push(new Particle(x, y, image))
-	}
+		let points = [
+			{ x: c.pos.x, y: c.pos.y },
+			{ x: c.pos.x + w, y: c.pos.y },
+			{ x: c.pos.x + w, y: c.pos.y + h },
+			{ x: c.pos.x, y: c.pos.y + h },
+		]
 
-	function calculatePosition() {
-		let x = cursor.x, y = cursor.y
+		if (distance > 1) {
+			const t = ANIMATION_EASING(1 - percent)
 
-		for (const particleIndex in particles) {
-			const nextParticlePos = (particles[+particleIndex + 1] || particles[0]).position
-			const particlePos = particles[+particleIndex].position
+			const clamped_x = Math.min(MAX_LENGTH, distance) * dx / distance
+			const clamped_y = Math.min(MAX_LENGTH, distance) * dy / distance
+			c.smear.x = c.pos.x + clamped_x
+			c.smear.y = c.pos.y + clamped_y
 
-			particlePos.x = x;
-			particlePos.y = y;
 
-			x += (nextParticlePos.x - particlePos.x) * 0.42
-			y += (nextParticlePos.y - particlePos.y) * 0.35
-		}
-	}
+			c.smear.x = lerp(c.smear.x, c.pos.x, t)
+			c.smear.y = lerp(c.smear.y, c.pos.y, t)
 
-	// for block cursor
-	function drawLines() {
-		context.beginPath()
-		context.lineJoin = "round"
-		context.strokeStyle = particlesColor
-		const lineWidth = Math.min(sizeX, sizeY)
-		context.lineWidth = lineWidth
+			let x_inset = lerp(w / 2 - w / 2 * SHRINK, 0, t)
+			let y_inset = lerp(h / 2 - h / 2 * SHRINK, 0, t)
 
-		// draw 3 lines
-		let ymut = (sizeY - lineWidth) / 3
-		for (let yoffset = 0; yoffset <= 3; yoffset++) {
-			let offset = yoffset * ymut
-			for (const particleIndex in particles) {
-				const pos = particles[particleIndex].position
-				if (particleIndex == 0) {
-					context.moveTo(pos.x, pos.y + offset + lineWidth / 2)
-				} else {
-					context.lineTo(pos.x, pos.y + offset + lineWidth / 2)
-				}
-			}
-		}
-		context.stroke()
-	}
-
-	// for line cursor
-	function drawPath() {
-		context.beginPath()
-		context.fillStyle = particlesColor
-
-		// draw path
-		for (let particleIndex = 0; particleIndex < totalParticles; particleIndex++) {
-			const pos = particles[+particleIndex].position
-			if (particleIndex == 0) {
-				context.moveTo(pos.x, pos.y)
-			} else {
-				context.lineTo(pos.x, pos.y)
-			}
-		}
-		for (let particleIndex = totalParticles - 1; particleIndex >= 0; particleIndex--) {
-			const pos = particles[+particleIndex].position
-			context.lineTo(pos.x, pos.y + sizeY)
-		}
-		context.closePath()
-		context.fill()
-
-		context.beginPath()
-		context.lineJoin = "round"
-		context.strokeStyle = particlesColor
-		context.lineWidth = Math.min(sizeX, sizeY)
-		// for up&down
-		let offset = -sizeX / 2 + sizeY / 2
-		for (const particleIndex in particles) {
-			const pos = particles[particleIndex].position
-			if (particleIndex == 0) {
-				context.moveTo(pos.x, pos.y + offset)
-			} else {
-				context.lineTo(pos.x, pos.y + offset)
-			}
-		}
-		context.stroke()
-	}
-
-	function updateParticles() {
-		if (!cursorsInitted) return
-
-		context.clearRect(0, 0, width, height)
-		calculatePosition()
-
-		if (style == "line") drawPath()
-		else if (style == "block") drawLines()
-	}
-
-	function updateCursorSize(newSize, newSizeY) {
-		sizeX = newSize
-		if (newSizeY) sizeY = newSizeY
-	}
-
-	return {
-		updateParticles: updateParticles,
-		move: move,
-		updateSize: updateSize,
-		updateCursorSize: updateCursorSize
-	}
-}
-
-// cursor create/remove/move event handler
-// by qwreey
-// (very dirty but may working)
-async function createCursorHandler(handlerFunctions) {
-	// Get Editor with dirty way (... due to vscode plugin api's limit)
-	/** @type { Element } */
-	let editor
-	while (!editor) {
-		await new Promise(resolve => setTimeout(resolve, 100))
-		editor = document.querySelector(".part.editor")
-	}
-	handlerFunctions?.onStarted(editor)
-
-	// cursor cache
-	let updateHandlers = []
-	let cursorId = 0
-	let lastObjects = {}
-	let lastCursor = 0
-
-	// cursor update handler
-	function createCursorUpdateHandler(target, cursorId, cursorHolder, minimap) {
-		let lastX, lastY // save last position
-		let update = (editorX, editorY) => {
-			// If cursor was destroyed, remove update handler
-			if (!lastObjects[cursorId]) {
-				updateHandlers.splice(updateHandlers.indexOf(update), 1)
-				return
+			const t_rect = {
+				tl: { x: c.pos.x + x_inset * 0.75, y: c.pos.y + y_inset * 0.75 },
+				tr: { x: c.pos.x + w - x_inset * 0.75, y: c.pos.y + y_inset * 0.75 },
+				br: { x: c.pos.x + w - x_inset * 0.75, y: c.pos.y + h - y_inset * 0.75 },
+				bl: { x: c.pos.x + x_inset * 0.75, y: c.pos.y + h - y_inset * 0.75 },
 			}
 
-			// get cursor position
-			let { left: newX, top: newY } = target.getBoundingClientRect()
-			let revX = newX - editorX, revY = newY - editorY
-
-			// if have no changes, ignore
-			if (revX == lastX && revY == lastY && lastCursor == cursorId) return
-			lastX = revX; lastY = revY // update last position
-
-			// wrong position
-			if (revX <= 0 || revY <= 0) return
-
-			// if it is invisible, ignore
-			if (target.style.visibility == "hidden") return
-
-			// if moved over minimap, ignore
-			if (minimap && minimap.offsetWidth != 0 && minimap.getBoundingClientRect().left <= newX) return
-
-			// if cursor is not displayed on screen, ignore
-			if (cursorHolder.getBoundingClientRect().left > newX) return
-
-			// update corsor position
-			lastCursor = cursorId
-			handlerFunctions?.onCursorPositionUpdated(revX, revY)
-			handlerFunctions?.onCursorSizeUpdated(target.clientWidth, target.clientHeight)
-		}
-		updateHandlers.push(update)
-	}
-
-	// handle cursor create/destroy event (using polling, due to event handlers are LAGGY)
-	let lastVisibility = "hidden"
-	setInterval(async () => {
-		let now = [], count = 0
-		// created
-		for (const target of editor.getElementsByClassName("cursor")) {
-			if (target.style.visibility != "hidden") count++
-			if (target.hasAttribute("cursorId")) {
-				now.push(+target.getAttribute("cursorId"))
-				continue
+			const s_rect = {
+				tl: { x: c.smear.x + x_inset, y: c.smear.y + y_inset },
+				tr: { x: c.smear.x + w - x_inset, y: c.smear.y + y_inset },
+				br: { x: c.smear.x + w - x_inset, y: c.smear.y + h - y_inset },
+				bl: { x: c.smear.x + x_inset, y: c.smear.y + h - y_inset },
 			}
-			let thisCursorId = cursorId++
-			now.push(thisCursorId)
-			lastObjects[thisCursorId] = target
-			target.setAttribute("cursorId", thisCursorId)
-			let cursorHolder = target.parentElement.parentElement.parentElement
-			let minimap = cursorHolder.parentElement.querySelector(".minimap")
-			createCursorUpdateHandler(target, thisCursorId, cursorHolder, minimap)
-			// console.log("DEBUG-CursorCreated",thisCursorId)
+
+			points = get_points(t_rect, s_rect)
 		}
 
-		// update visible
-		let visibility = count <= 1 ? "visible" : "hidden"
-		if (visibility != lastVisibility) {
-			handlerFunctions?.onCursorVisibilityChanged(visibility)
-			lastVisibility = visibility
+		ctx.save()
+		ctx.fillStyle = c.background
+		ctx.globalAlpha = opacity
+
+		ctx.beginPath()
+		ctx.moveTo(points[0].x, points[0].y)
+
+		for (let i = 1; i < points.length; i++) {
+			ctx.lineTo(points[i].x, points[i].y)
 		}
 
-		// destroyed
-		for (const id in lastObjects) {
-			if (now.includes(+id)) continue
-			delete lastObjects[+id]
-			// console.log("DEBUG-CursorRemoved",+id)
-		}
-	}, handlerFunctions?.cursorUpdatePollingRate || 500)
+		ctx.closePath()
+		ctx.fill()
+		ctx.restore()
 
-	// read cursor position polling
-	function updateLoop() {
-		let { left: editorX, top: editorY } = editor.getBoundingClientRect()
-		for (handler of updateHandlers) handler(editorX, editorY)
-		handlerFunctions?.onLoop()
-		requestAnimationFrame(updateLoop)
+		c.els.forEach(el => {
+			if (!el.parentNode) return
+			if (!el.parentNode.classList.contains("cursor-block-style")) return
+			const clone = el.cloneNode(true)
+			clone.style.left = c.pos.x + "px"
+			clone.style.top = c.pos.y + "px"
+			clone.style.position = "fixed"
+			clone.style.zIndex = 2
+			clone.style.color = c.color
+			clone.style.opacity = opacity
+			ctnr.appendChild(clone)
+		})
 	}
 
-	// handle editor view size changed event
-	function updateEditorSize() {
-		handlerFunctions?.onEditorSizeUpdated(editor.clientWidth, editor.clientHeight)
+	function get_float_value(el, property) {
+		return parseFloat(getComputedStyle(el).getPropertyValue(property).replace("px", ""))
 	}
-	new ResizeObserver(updateEditorSize).observe(editor)
-	updateEditorSize()
 
-	// startup
-	updateLoop()
-	handlerFunctions?.onReady()
-}
+	function assign(cursor, idx) {
+		cursor.style.backgroundColor = "transparent"
 
-// Main handler code
-let cursorCanvas, rainbowCursorHandle
-createCursorHandler({
-	cursorUpdatePollingRate: CursorUpdatePollingRate,
+		if (!validate(cursor)) return
 
-	onStarted: (editor) => {
-		cursorCanvas = document.createElement("canvas")
-		cursorCanvas.style.pointerEvents = "none"
-		cursorCanvas.style.position = "absolute"
-		cursorCanvas.style.top = "0px"
-		cursorCanvas.style.left = "0px"
-		cursorCanvas.style.zIndex = "1000"
-		editor.appendChild(cursorCanvas)
+		const c = cursor_list[idx] || {}
+		const cp = cursor.getBoundingClientRect()
 
-		color = getComputedStyle(
+		c.pos = { x: cp.left, y: cp.top }
+		c.size = { x: cursor.offsetWidth, y: cursor.offsetHeight }
+		c.background = getComputedStyle(
 			document.querySelector("body>.monaco-workbench"))
 			.getPropertyValue("--vscode-editorCursor-foreground")
 			.trim()
+		c.color = getComputedStyle(
+			document.querySelector("body>.monaco-workbench"))
+			.getPropertyValue("--vscode-editorCursor-background")
+			.trim()
+		c.last_pos = c.last_pos || c.pos
+		c.smear = c.smear || c.pos
+		c.time = c.time || 0
+		c.els = c.els || []
+		if (!c.els.includes(cursor)) {
+			c.els.push(cursor)
+		}
 
-		rainbowCursorHandle = createTrail({
-			length: TrailLength,
-			color: color,
-			size: 7,
-			style: CursorStyle,
-			canvas: cursorCanvas
-		})
-	},
+		if (c.last_pos.x !== cp.left || c.last_pos.y !== cp.top) {
+			c.time = ANIMATION_TIME
+			c.smear = c.last_pos
+			c.last_pos = c.pos
+		}
+		cursor_list[idx] = c
+	}
 
-	onReady: () => { },
-	onCursorPositionUpdated: (x, y) => {
-		rainbowCursorHandle.move(x, y)
-	},
+	const anim = requestAnimationFrame || (callback => setTimeout(callback, 1000 / 60))
+	async function run() {
+		let editor
+		let last
+		let delta
 
-	onEditorSizeUpdated: (x, y) => {
-		rainbowCursorHandle.updateSize(x, y)
-	},
+		function rr(stamp) {
+			last = stamp
+			anim(step)
+		}
 
-	onCursorSizeUpdated: (x, y) => {
-		rainbowCursorHandle.updateCursorSize(x, y)
-	},
-	onCursorVisibilityChanged: (visibility) => {
-		cursorCanvas.style.visibility = visibility
-	},
-	onLoop: () => {
-		rainbowCursorHandle.updateParticles()
-	},
+		function step(stamp) {
+			try {
+				delta = (stamp - last)
+				editor = document.querySelector(".part.editor")
+				if (editor === null) return rr(stamp)
+				const container = document.querySelector(".monaco-grid-view")
+				const container_bbox = container.getBoundingClientRect()
+				const canvas = create_canvas(container, 'cursor-trails')
+				canvas.width = container_bbox.width
+				canvas.height = container_bbox.height
+				const ctx = canvas.getContext('2d')
+				ctx.clearRect(0, 0, canvas.width, canvas.height)
+				const cursors = Array.from(editor.getElementsByClassName("cursor"))
 
-})
+				let cursor_container = document.querySelector(".cursor-container")
+				if (!cursor_container) {
+					cursor_container = document.createElement("div")
+					cursor_container.className = "cursor-container"
+					cursor_container.style.position = "fixed"
+					cursor_container.style.pointerEvents = "none"
+					cursor_container.style.top = 0
+					cursor_container.style.left = 0
+					cursor_container.style.zIndex = 2
+
+					document.body.appendChild(cursor_container)
+				}
+
+				cursor_container.innerHTML = ""
+
+
+				if (cursors.length === 0) return rr(stamp)
+				let idx = 0
+
+				cursors.forEach(cursor => {
+					if (cursor.classList.contains("cursor-secondary")) idx++
+					assign(cursor, idx)
+				})
+
+				if (cursor_list.length > idx + 1) {
+					cursor_list.splice(cursors.length, cursor_list.length - cursors.length)
+				}
+
+				cursor_list.forEach(cursor => {
+					draw(cursor, cursor_container, ctx, delta)
+				})
+
+				rr(stamp)
+			} catch (e) {
+				console.log("DBG: ERR: ", e)
+				rr(stamp)
+			}
+		}
+
+		anim(step)
+	}
+
+	run()
+}

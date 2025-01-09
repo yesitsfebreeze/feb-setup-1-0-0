@@ -20,7 +20,12 @@
 	"extensions.ignoreRecommendations": true,
 	"editor.lineDecorationsWidth": 5,
 	"editor.showFoldingControls": "never",
-	// keeps the cursor in the middle of the screen
-	"editor.cursorSurroundingLines": 9999999,
+	// 99999999 here keeps the cursor in the middle of the screen
+	"editor.cursorSurroundingLines": 16,
 	"maptz.regionfolder.collapseDefaultRegionsOnOpen": false,
+	// never open debug console
+	"debug.openDebug": "neverOpen",
+	"debug.internalConsoleOptions": "neverOpen",
+	"debug.console.focusOnStart": false,
+	"defoldKit.general.showBobOutput": false,
 }

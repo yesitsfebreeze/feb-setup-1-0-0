@@ -101,7 +101,7 @@
     "command": "deleteInsideWord"
   },
   {
-    "key": "ctrl+w",
+    "key": "ctrl+shift+w",
     "command": "group.close"
   },
   {

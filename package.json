@@ -1,10 +1,11 @@
 {
-	"name": "feb-setup-1-0-0",
-	"displayName": "feb.setup-1.0.0",
+	"name": "febreeze.setup-1.0.0",
+	"displayName": "Setup",
+	"license": "MIT",
 	"description": "",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"engines": {
-		"vscode": "^1.96.0"
+		"vscode": "^1.96.2"
 	},
 	"categories": [
 		"Other"
