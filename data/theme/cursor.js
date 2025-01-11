@@ -169,18 +169,18 @@
 		ctx.fill()
 		ctx.restore()
 
-		c.els.forEach(el => {
-			if (!el.parentNode) return
-			if (!el.parentNode.classList.contains("cursor-block-style")) return
-			const clone = el.cloneNode(true)
-			clone.style.left = c.pos.x + "px"
-			clone.style.top = c.pos.y + "px"
-			clone.style.position = "fixed"
-			clone.style.zIndex = 2
-			clone.style.color = c.color
-			clone.style.opacity = opacity
-			ctnr.appendChild(clone)
-		})
+		// c.els.forEach(el => {
+		// 	if (!el.parentNode) return
+		// 	if (!el.parentNode.classList.contains("cursor-block-style")) return
+		// 	const clone = el.cloneNode(true)
+		// 	clone.style.left = c.pos.x + "px"
+		// 	clone.style.top = c.pos.y + "px"
+		// 	clone.style.position = "fixed"
+		// 	clone.style.zIndex = 2
+		// 	clone.style.color = c.color
+		// 	clone.style.opacity = opacity
+		// 	ctnr.appendChild(clone)
+		// })
 	}
 
 	function get_float_value(el, property) {
@@ -246,20 +246,20 @@
 				ctx.clearRect(0, 0, canvas.width, canvas.height)
 				const cursors = Array.from(editor.getElementsByClassName("cursor"))
 
-				let cursor_container = document.querySelector(".cursor-container")
-				if (!cursor_container) {
-					cursor_container = document.createElement("div")
-					cursor_container.className = "cursor-container"
-					cursor_container.style.position = "fixed"
-					cursor_container.style.pointerEvents = "none"
-					cursor_container.style.top = 0
-					cursor_container.style.left = 0
-					cursor_container.style.zIndex = 2
+				// let ctr = document.querySelector(".cursor-container")
+				// if (!ctr) {
+				// 	ctr = document.createElement("div")
+				// 	ctr.className = "cursor-container"
+				// 	ctr.style.position = "fixed"
+				// 	ctr.style.pointerEvents = "none"
+				// 	ctr.style.top = 0
+				// 	ctr.style.left = 0
+				// 	ctr.style.zIndex = 2
 
-					document.body.appendChild(cursor_container)
-				}
+				// 	document.body.appendChild(ctr)
+				// }
 
-				cursor_container.innerHTML = ""
+				// ctr.innerHTML = ""
 
 
 				if (cursors.length === 0) return rr(stamp)
@@ -275,7 +275,7 @@
 				}
 
 				cursor_list.forEach(cursor => {
-					draw(cursor, cursor_container, ctx, delta)
+					draw(cursor, undefined, ctx, delta)
 				})
 
 				rr(stamp)

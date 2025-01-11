@@ -3,12 +3,27 @@ import * as fs from 'fs';
 import * as path from 'path';
 import JSON5 from 'json5';
 
+
+
+function add_file(file: string) {
+	const f = `file://${file}`
+	const conf = vscode.workspace.getConfiguration()
+	if (conf.vscode_custom_css.imports.includes(f)) return
+
+	conf.vscode_custom_css.imports.push(f)
+
+	conf.update(
+		"vscode_custom_css.imports",
+		conf.vscode_custom_css.imports,
+		vscode.ConfigurationTarget.Global
+	)
+}
+
+
 export default function (context: vscode.ExtensionContext) {
 	let settings: { [key: string]: any } = {};
 
-	let css = path.join(context.extensionPath, "cache", "custom.css");
-	let cursor_js = path.join(context.extensionPath, "data", "theme", "cursor.js");
-	let video_js = path.join(context.extensionPath, "data", "theme", "video.js");
+
 
 	const settings_path = path.join(context.extensionPath, "data", "settings");
 	fs.readdirSync(settings_path).forEach(file => {
@@ -28,17 +43,6 @@ export default function (context: vscode.ExtensionContext) {
 		vscode.workspace.getConfiguration().update(el[0], el[1], vscode.ConfigurationTarget.Global);
 	});
 
-
-	vscode.workspace.getConfiguration().update(
-		"vscode_custom_css.imports",
-		[
-			`file://${css}`,
-			`file://${cursor_js}`,
-			`file://${video_js}`,
-
-		],
-		vscode.ConfigurationTarget.Global
-	);
-
-
+	add_file(path.join(context.extensionPath, "cache", "custom.css"))
+	add_file(path.join(context.extensionPath, "data", "theme", "blur.js"))
 }

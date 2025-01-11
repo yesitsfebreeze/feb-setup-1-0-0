@@ -57,8 +57,7 @@
 	"extensionPack": [
 		"sleistner.vscode-fileutils",
 		"michaelgriscom.leadermode",
-		"GitHub.copilot",
-		"GitHub.copilot-chat",
+		"Codeium.codeium",
 		"be5invis.vscode-custom-css",
 		"maptz.regionfolder",
 		"angelo-breuer.clock",

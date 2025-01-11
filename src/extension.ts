@@ -18,6 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
 		background(context);
 		settings(context);
 		keybinds(context);
+		vscode.commands.executeCommand("smearcursor.enable");
 		vscode.commands.executeCommand("extension.updateCustomCSS");
 		setTimeout(function () {
 			vscode.commands.executeCommand('workbench.action.reloadWindow');

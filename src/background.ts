@@ -7,7 +7,7 @@ export default function (context: vscode.ExtensionContext) {
 
 	const cache_file = path.join(context.extensionPath, "cache", "custom.css");
 
-	let data = "";
+	let bg_path = "";
 	let opacity = config.bg_opacity;
 	let blur = config.bg_blur;
 	let brightness = config.bg_brightness;
@@ -41,13 +41,14 @@ export default function (context: vscode.ExtensionContext) {
 
 	if (config.bg_image !== '') {
 		try {
-			data = Buffer.from(fs.readFileSync(config.bg_image)).toString('base64');
+			fs.copyFileSync(config.bg_image, path.join(context.extensionPath, "cache", "bg.png"));
+			bg_path = Buffer.from(fs.readFileSync(config.bg_image)).toString('base64');
 		} catch (error: any) {
 			vscode.window.showErrorMessage(`Failed to load the file: ${error.message}`);
 			console.error('Error reading file:', error);
 		}
 
-		if (data === "") {
+		if (bg_path === "") {
 			vscode.workspace.getConfiguration().update(
 				"feb.background",
 				"none",
@@ -58,7 +59,7 @@ export default function (context: vscode.ExtensionContext) {
 
 	let css = path.join(context.extensionPath, "data", "theme", "custom.css");
 	let content = fs.readFileSync(css, 'utf-8');
-	content = content.replaceAll("___BACKGROUND___", data);
+	content = content.replaceAll("___BACKGROUND___", bg_path);
 	content = content.replaceAll("___BACKGROUND_OPACITY___", opacity);
 	content = content.replaceAll("___BACKGROUND_BLUR___", blur);
 	content = content.replaceAll("___BACKGROUND_BRIGHTNESS___", brightness);
