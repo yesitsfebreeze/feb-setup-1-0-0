@@ -25,8 +25,16 @@
 				"title": "Moves to editor group or creates a new one"
 			},
 			{
+				"command": "feb.split_hs",
+				"title": "Splits Header/Source"
+			},
+			{
 				"command": "feb.reload",
 				"title": "Feb: Reload"
+			},
+			{
+				"command": "feb.leadermode",
+				"title": "Feb: LeaderMode"
 			}
 		],
 		"configuration": {

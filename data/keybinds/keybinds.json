@@ -227,7 +227,7 @@
   },
   {
     "key": "ctrl+shift+alt+cmd+m",
-    "command": "leadermode.enter"
+    "command": "feb.leadermode"
   },
   {
     "key": "cmd+.",

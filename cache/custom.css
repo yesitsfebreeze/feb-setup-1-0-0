@@ -105,9 +105,9 @@ body::before {
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	opacity: 1;
-	filter: blur(5px);
-	-webkit-filter: blur(5px);
+	opacity: 0.5;
+	filter: blur(0px);
+	-webkit-filter: blur(0px);
 }
 
 .monaco-workbench::before {
@@ -118,7 +118,7 @@ body::before {
 	height: 100% !important;
 	position: fixed !important;
 	background-color: var(--vscode-editor-background) !important;
-	opacity: 0.9;
+	opacity: 0.95;
 }
 
 body::before {
@@ -147,8 +147,8 @@ body::before {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	filter: blur(5px);
-	-webkit-filter: blur(5px);
+	filter: blur(0px);
+	-webkit-filter: blur(0px);
 }
 
 

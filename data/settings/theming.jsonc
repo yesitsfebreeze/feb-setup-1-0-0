@@ -49,7 +49,7 @@
 	"smearcursor.max_length": 9999999,
 	"smearcursor.tip_shrink": 0.15,
 	"smearcursor.tail_shrink": 0.75,
-	"smearcursor.opacity": 0.5,
+	"smearcursor.opacity": 0.15,
 	"workbench.colorCustomizations": {
 		"editorCursor.background": "#272727",
 		"editorCursor.foreground": "#ffedb2",
