@@ -17,13 +17,13 @@
 		},
 		{
 			"keySequence": "ss",
-			"label": "Split (Header/Source)",
-			"command": "feb.split_hs"
-		},
-		{
-			"keySequence": "sd",
 			"label": "Split",
 			"command": "feb.split"
+		},
+		{
+			"keySequence": "sh",
+			"label": "Split (Header/Source)",
+			"command": "feb.split_hs"
 		},
 		// #region file
 		{
